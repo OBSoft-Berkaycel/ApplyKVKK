@@ -15,7 +15,8 @@
                 <small class="text-muted float-end">İlgili adımları takip ediniz.</small>
               </div>
               <div class="card-body">
-                <form action="save_info.php" method="post">
+                <form action="{{route('form.create')}}" method="post">
+                  @csrf
                   <div class="mb-3">
                     <label class="form-label" for="first_name">Hasta Adı</label>
                     <div class="input-group input-group-merge">

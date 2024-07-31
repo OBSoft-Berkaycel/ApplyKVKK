@@ -15,14 +15,6 @@ class PdfController extends Controller
     }
 
     /**
-     * Creates a listing of the resource.
-     */
-    public function create()
-    {
-        return view('create-form');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
