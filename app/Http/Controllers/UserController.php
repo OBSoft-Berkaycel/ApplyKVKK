@@ -13,6 +13,13 @@ class UserController extends Controller
     {
         return view("create-user");
     }
+    /**
+     * Returns login page.
+     */
+    public function create()
+    {
+        return view("auth.custom-login");
+    }
 
     /**
      * Store a newly created resource in storage.

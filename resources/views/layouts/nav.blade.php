@@ -56,14 +56,16 @@ id="layout-navbar">
         <div class="dropdown-divider"></div>
         </li>
         <li>
-        <a class="dropdown-item" href="logout.php">
-            <i class="bx bx-power-off me-2"></i>
-            <span class="align-middle">Log Out</span>
-        </a>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button class="dropdown-item" type="submit">
+                    <i class="bx bx-power-off me-2"></i>
+                    <span class="align-middle">Log Out</span>
+                </button>
+            </form>
         </li>
     </ul>
     </li>
-    <!--/ User -->
 </ul>
 </div>
 </nav>
