@@ -50,6 +50,9 @@ class FormController extends Controller
             $request->validate([
                 "image_data" => "required",
                 "is_accepted" => "required"
+            ],[
+                'image_data.required' => 'İmza alanı eksik. Lütfen imza alanını doldurunuz!',
+                'is_accepted.required' => 'Aydınlatma metnini onaylamanız gerekmektedir!',
             ]);
             if ($request->is_accepted !== "on") {
                 throw new Exception("Kvkk aydınlatma metnini onaylamanız gerekmektedir!");
@@ -76,12 +79,12 @@ class FormController extends Controller
             {
                 throw new Exception("Kayıt işlemi sırasında bir hata oluştu!");
             }
+            Session::forget('kvkk');
             flash()->success("Kullanıcı form kaydı başarıyla tamamlanmıştır!");
             return redirect()->route('dashboard');
         } catch (\Throwable $th) {
-            dd("Error: ",$th->getMessage());
             flash()->error($th->getMessage());
-            return redirect()->back();
+            return view("kvkk");
         }
     }
 }

@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container-xxl container-p-y">
-    <!-- Basic Layout -->
     <div class="table-responsive text-nowrap mt-5">
         <table id="pdfTable" class="table card-table">
             <thead>
@@ -17,19 +16,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>surname</td>
-                    <td>tc kimlik no</td>
-                    <td>telefon</td>
-                    <td><address></address></td>
-                    <td>
-                        <a href='download' class='btn btn-primary' target='_blank'>
-                            <i class='bx bxs-cloud-download me-2'></i> İndir
-                        </a>
-                    </td>
-                </tr>
+                @foreach ($forms as $form)
+                    <tr>
+                        <td>{{ $form->id }}</td>
+                        <td>{{ $form->patient_name }}</td>
+                        <td>{{ $form->patient_surname }}</td>
+                        <td>{{ $form->patient_id }}</td>
+                        <td>{{ $form->patient_phone }}</td>
+                        <td>{{ $form->patient_address }}</td>
+                        <td>
+                            <form action="{{route('download.pdf',['form' => $form->id])}}" method="post">
+                                @csrf
+                                <button type="submit" class='btn btn-primary' target='_blank'>
+                                    <i class='bx bxs-cloud-download me-2'></i> İndir
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -63,7 +67,7 @@
     $(document).ready(function() {
         $('#pdfTable').DataTable({
             "language": {
-                url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/tr.json',
+                url: 'assets/json/tr.json',
             },
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tümü"]],
             "pageLength": 10,
@@ -72,10 +76,10 @@
                 {
                     extend: 'pdfHtml5',
                     text: 'Tabloyu PDF İndir',
-                    title: 'KVKK Onaylı Bildirim Tablosu', // PDF başlığı
-                    filename: 'kullanici_bilgileri', // Dosya adı
+                    title: 'KVKK Onaylı Bildirim Tablosu',
+                    filename: 'kullanici_bilgileri',
                     exportOptions: {
-                        columns: [1, 2, 3, 4, 5] // Sadece bu sütunlar dahil edilecek
+                        columns: [1, 2, 3, 4, 5]
                     },
                     customize: function(doc) {
                         doc.defaultStyle.alignment = 'center';

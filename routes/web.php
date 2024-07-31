@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     
     Route::controller(PdfController::class)->group(function(){
         Route::get('form-list','show')->name('form.list');
+        Route::post('download-pdf/{form}','downloadPdf')->name('download.pdf');
     });
     
     Route::controller(FormController::class)->group(function(){

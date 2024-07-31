@@ -2,47 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PdfController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
     public function show()
     {
-        return view("pdf-list");
+        $forms = Form::orderBy("created_at","DESC")->get();
+        return view("form-list",compact('forms'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function downloadPdf(Form $form, PDF $pdf)
     {
-        //
-    }
+        $imagePath = Storage::disk('public')->path($form->sign_image_path);
+        $pdf = $pdf->loadView('custom.pdf', compact('form','imagePath'))
+                ->setPaper('A4', 'portrait');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $pdf->download('kvkk_bilgilendirme_'.$form->patient_name.'_'.$form->patient_surname.'.pdf');
     }
 }
