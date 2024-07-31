@@ -71,8 +71,7 @@
         </a>
         <ul class="menu-sub">
           <li class="menu-item active">
-            <a
-              href="newform.php"
+            <a href="{{route('form.create')}}"
               class="menu-link">
               <div data-i18n="eCommerce">KVKK Formu</div>
               <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto"><i class='bx bx-plus'></i></div>
