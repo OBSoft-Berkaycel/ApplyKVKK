@@ -1,5 +1,13 @@
 @extends('layouts.master')
 
+@section('styles')
+<style>
+    /* Basic styling for the canvas */
+    canvas {
+        border: 1px solid black;
+    }
+</style>
+@endsection
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -17,18 +25,30 @@
                         Content
                     </div>
                     <div class="card-footer pt-5 float-right">
-                        <div class="row">
-                            <h6 class="card-subtitle mb-2 text-muted">Yukarıda açıkça belirtilen, Kişisel Verilerin Korunması Kanunu kapsamında ki metni okudum, anladım, onaylıyorum.</h6>
-                            <div class="col-xl-3">
-                                <canvas id="signature-pad" class="mb-3"></canvas><br>
+                        <form id="drawingForm" action="{{route('form.save')}}" method="post">
+                            @csrf
+                            <div class="row">
+                                <div class="col-xl-3">
+                                    <label for="is_accepted">Okudum, onaylıyorum.</label>
+                                    <input type="checkbox" name="is_accepted" id="is_accepted">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <button id="clear" class="btn btn-warning">Temizle</button>
-                                <button id="save" class="btn btn-primary">Kaydet</button>
+                            <br>
+                            <div class="row">
+                                <h6 class="card-subtitle mb-2 text-muted">Yukarıda açıkça belirtilen, Kişisel Verilerin Korunması Kanunu kapsamında ki metni okudum, anladım, onaylıyorum.</h6>
+                                <div class="col-xl-3">
+                                    {{-- <canvas id="signature-pad" class="mb-3"></canvas><br> --}}
+                                    <canvas id="drawingCanvas" class="mb-3"></canvas>
+                                    <input type="hidden" name="image_data" id="imageData">
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <button id="clear" class="btn btn-warning">Temizle</button>
+                                    <button id="save" type="submit" class="btn btn-primary">Kaydet</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -58,70 +78,42 @@
 @endsection
 
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-<script>
-    var canvas = document.getElementById('signature-pad');
-    var signaturePad = new SignaturePad(canvas);
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script>
+        // Set up the canvas and context
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
 
-    document.getElementById('clear').addEventListener('click', function () {
-        signaturePad.clear();
-    });
+        canvas.addEventListener('mousedown', (e) => {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
 
-    document.getElementById('save').addEventListener('click', function () {
-        if (signaturePad.isEmpty()) {
-            showModal("Hata", "Lütfen imza atın.");
-        } else {
-            var data = signaturePad.toDataURL('image/png');
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'save_signature.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // İmza kaydedildiğinde raporu kaydet
-                    var reportXhr = new XMLHttpRequest();
-                    reportXhr.open('POST', 'save_report.php', true);
-                    reportXhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    reportXhr.onreadystatechange = function () {
-                        if (reportXhr.readyState == 4 && reportXhr.status == 200) {
-                            showModal("Başarılı", "İmza ve rapor kaydedildi ve PDF oluşturuldu.", function () {
-                                // Yönlendirme işlemi
-                                var isAdmin =  {{ 'admin' === 'admin' ? 'true' : 'false'}};
-                                if (isAdmin) {
-                                    window.location.href = 'list_pdfs.php';
-                                } else {
-                                    window.location.href = 'newform.php';
-                                }
-                            });
-                        } else if (reportXhr.readyState == 4) {
-                            showModal("Hata", "İmza veya rapor kaydedilemedi. Lütfen tekrar deneyin.");
-                        }
-                    };
-                    reportXhr.send('user_id=<?php echo $_SESSION["user_id"]; ?>&report_content=Form ve imza kaydedildi.');
-                } else if (xhr.readyState == 4) {
-                    showModal("Hata", "İmza kaydedilemedi. Lütfen tekrar deneyin.");
-                }
-            };
-            xhr.send('id=<?php echo $_GET["id"]; ?>&signature=' + encodeURIComponent(data));
-        }
-    });
+        canvas.addEventListener('mousemove', (e) => {
+            if (drawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+        });
 
-    function showModal(title, message, callback) {
-        document.getElementById('responseModalLabel').textContent = title;
-        document.getElementById('modalMessage').textContent = message;
-        $('.responseModal').modal('show');
-        if (callback) {
-            $('.responseModal').on('hidden.bs.modal', function () {
-                callback();
-                $('.responseModal').off('hidden.bs.modal');
-            });
-        }
-        // Modal 5 saniye sonra otomatik kapanacak
-        setTimeout(function () {
-            $('.responseModal').modal('hide');
-        }, 5000);
-    }
-</script>
+        canvas.addEventListener('mouseup', () => {
+            drawing = false;
+        });
+
+        // Clear the canvas
+        document.getElementById('clear').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        // Convert canvas to an image and submit the form
+        document.getElementById('drawingForm').addEventListener('submit', (e) => {
+            const imageData = canvas.toDataURL('image/png'); // Convert canvas to Base64
+            document.getElementById('imageData').value = imageData;
+        });
+    </script>
 @endsection

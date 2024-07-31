@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -20,12 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::controller(PdfController::class)->group(function(){
-        Route::get('pdf-list','show')->name('pdf.list');
+        Route::get('form-list','show')->name('form.list');
     });
     
     Route::controller(FormController::class)->group(function(){
         Route::get('create-form','create')->name('form.create');
         Route::post('create-form','store')->name('form.create');
+        Route::post('save-form','saveUserForm')->name('form.save');
     });
     
     Route::controller(UserController::class)->group(function(){

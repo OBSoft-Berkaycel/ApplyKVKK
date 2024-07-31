@@ -21,12 +21,7 @@
                     <label class="form-label" for="first_name">Hasta Adı</label>
                     <div class="input-group input-group-merge">
                       <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="first_name"
-                        name="first_name"
-                        placeholder="Hasta Adı" required/>
+                      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Hasta Adı" required/>
                     </div>
                   </div>
                   <div class="mb-3">
@@ -35,47 +30,28 @@
                       <span id="basic-icon-default-fullname2" class="input-group-text"
                         ><i class="bx bx-user"></i
                       ></span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="last_name"
-                        name="last_name"
-                        placeholder="Hasta Soyadı" required/>
+                      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Hasta Soyadı" required/>
                     </div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="id_number">T.C. Kimlik Numarası</label>
                     <div class="input-group input-group-merge">
                       <span id="basic-icon-default-fullname2" class="input-group-text"><i class='bx bx-fingerprint'></i></span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="id_number"
-                        name="id_number"
-                        placeholder="Hastaya ait T.C. Kimlik Numarası" required/>
+                      <input type="text" class="form-control" id="id_number" name="id_number" placeholder="Hastaya ait T.C. Kimlik Numarası" required/>
                     </div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="phone">Telefon Numarası</label>
                     <div class="input-group input-group-merge">
                       <span id="basic-icon-default-fullname2" class="input-group-text"><i class='bx bx-phone'></i></span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="phone"
-                        name="phone"
-                        placeholder="Hastaya ait telefon numarası" required/>
+                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Hastaya ait telefon numarası" required/>
                     </div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="address">Adres Bilgisi</label>
                     <div class="input-group input-group-merge">
                       <span id="basic-icon-default-message2" class="input-group-text"><i class='bx bx-current-location'></i></span>
-                      <textarea
-                        id="address"
-                        name="address"
-                        class="form-control"
-                        placeholder="Hastaya ait açık adres bilgisi" required></textarea>
+                      <textarea id="address" name="address" class="form-control" placeholder="Hastaya ait açık adres bilgisi" required></textarea>
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">İmzaya Geç</button>

@@ -78,7 +78,7 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="{{route('pdf.list')}}"
+            <a href="{{route('form.list')}}"
               class="menu-link">
               <div data-i18n="eCommerce">KVKK Belgeler</div>
             </a>
