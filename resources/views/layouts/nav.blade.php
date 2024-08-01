@@ -37,8 +37,8 @@ id="layout-navbar">
                 </div>
             </div>
             <div class="flex-grow-1">
-                <span class="fw-medium d-block">Firstname Lastname</span>
-                <small class="text-muted">Yetkiniz: Admin</small>
+                <span class="fw-medium d-block">{{ app('user')->get('username') }}</span>
+                <small class="text-muted">Yetkiniz: {{ app('user')->get('role') == 1 ? 'Kullanıcı' : 'Admin' }}</small>
             </div>
             </div>
         </a>
@@ -49,7 +49,7 @@ id="layout-navbar">
         <li>
         <a class="dropdown-item" href="{{route('user.update')}}">
             <i class="bx bx-user me-2"></i>
-            <span class="align-middle">My Profile</span>
+            <span class="align-middle">Profilim</span>
         </a>
         </li>
         <li>
@@ -60,7 +60,7 @@ id="layout-navbar">
                 @csrf
                 <button class="dropdown-item" type="submit">
                     <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Log Out</span>
+                    <span class="align-middle">Çıkış Yap</span>
                 </button>
             </form>
         </li>

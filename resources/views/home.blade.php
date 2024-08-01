@@ -7,7 +7,7 @@
             <div class="d-flex align-items-end row">
                 <div class="col-sm-7">
                 <div class="card-body">
-                    <h5 class="card-title text-primary">Merhaba, {{\Illuminate\Support\Facades\Auth::user()->email}}</h5>
+                    <h5 class="card-title text-primary">Merhaba, {{ $user->usernam }}</h5>
                     <p class="mb-4">
                     Sisteme girişiniz başarıyla yapılmıştır. Sistem üzerinde ki hareketleriniz veritabanına kaydedilmektedir.
                     </p>
@@ -35,7 +35,7 @@
                                 <div class="avatar flex-shrink-0">
                                     <img src="{{asset('assets/img/icons/unicons/chart-success.png')}}" alt="chart success" class="rounded" />
                                 </div>
-                                <div class="dropdown">
+                                {{-- <div class="dropdown">
                                     <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
@@ -43,13 +43,13 @@
                                         <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                         <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <span class="fw-medium d-block mb-1">Bugün  <small class="{{ 20 >= 0 ? 'text-success' : 'text-danger'}} fw-medium">
                                 <i class="bx bx-{{ 20 >= 0 ? 'up' : 'down' }}-arrow-alt"></i> 
                                 {{round(abs(20), 2)}}%
                             </small></span>
-                            <h3 class="card-title mb-2 mt-3">4 Adet</h3>
+                            <h3 class="card-title mb-2 mt-3">{{ $formCountToday }} Adet</h3>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                             <div class="avatar flex-shrink-0">
                                 <img src="{{asset('assets/img/icons/unicons/wallet-info.png')}}" alt="Credit Card" class="rounded" />
                             </div>
-                            <div class="dropdown">
+                            {{-- <div class="dropdown">
                                 <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
@@ -68,10 +68,10 @@
                                     <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                     <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <span>Toplam Belge</span>
-                        <h3 class="card-title text-nowrap mb-1 mt-3">3 Adet</h3>
+                        <h3 class="card-title text-nowrap mb-1 mt-3">{{ $allFormCount }} Adet</h3>
                     </div>
                 </div>
             </div>

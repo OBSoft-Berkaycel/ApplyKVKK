@@ -70,26 +70,30 @@
           <div data-i18n="Dashboards">Ana Menüler</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item active">
-            <a href="{{route('form.create')}}"
-              class="menu-link">
-              <div data-i18n="eCommerce">KVKK Formu</div>
-              <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto"><i class='bx bx-plus'></i></div>
-            </a>
-          </li>
+          @if (app('user')->get('role') == 2)
+            <li class="menu-item active">
+              <a href="{{route('form.create')}}"
+                class="menu-link">
+                <div data-i18n="eCommerce">KVKK Formu</div>
+                <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto"><i class='bx bx-plus'></i></div>
+              </a>
+            </li>
+          @endif
           <li class="menu-item">
             <a href="{{route('form.list')}}"
               class="menu-link">
               <div data-i18n="eCommerce">KVKK Belgeler</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="{{route('user.create')}}"
-              class="menu-link">
-              <div data-i18n="eCommerce">Personel Oluştur</div>
-              <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto"><i class='bx bx-user-plus' ></i></div>
-            </a>
-          </li>
+          @if (app('user')->get('role') == 2)
+            <li class="menu-item">
+              <a href="{{route('user.create')}}"
+                class="menu-link">
+                <div data-i18n="eCommerce">Personel Oluştur</div>
+                <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto"><i class='bx bx-user-plus' ></i></div>
+              </a>
+            </li>
+          @endif
         </ul>
       </li>
 
