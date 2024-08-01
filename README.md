@@ -77,6 +77,6 @@ npm run build
 ### İlk Kurulum Sonrası
 Kurulum tamamlandıktan sonra panel'e aşağıdaki kullanıcı bilgileriyle giriş yapabilirsiniz:
 ```bash
-Mail: superadmin@admin.com
+Mail,Kullanıcı Adı, Telefon No: superadmin@admin.com, superadmin veya 5998887766
 Şifre: Qazwsx123!
 ```
