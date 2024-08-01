@@ -58,8 +58,8 @@ class UserController extends Controller
             return redirect('/');
         } catch (\Throwable $th) {
             Log::error("Yeni kullanıcı kaydı oluşturma sırasında bir sorun oluştu! Error: ".$th->getMessage());
-            flash()->error($th->getMessage());
-            return redirect()->route('user.create')->withInput();
+            flash()->error("Yeni kullanıcı kaydı oluşturma sırasında bir sorun oluştu!");
+            return redirect()->route('user.create');
         }
     }
 
@@ -69,15 +69,43 @@ class UserController extends Controller
     public function show()
     {
         $user = Auth::user();
-        dd("my profile");
+        return view('update-user',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'username' => ['required', 'string', 'max:255', 'unique:users,username,'. Auth::id()],
+                'firstname' => ['required', 'string'],
+                'lastname' => ['required', 'string'],
+                'email' => ['required','email','unique:users,email,' . Auth::id()],
+                'phone' => ['required', 'regex:/^\d{10}$/', 'unique:users,phone,'. Auth::id()],
+                'password' => ['string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', 'confirmed'],
+            ]);
+            $user = User::find(Auth::id());
+            $user->name = $request->firstname;
+            $user->surname = $request->lastname;
+            $user->username = $request->username;
+            $user->phone = $request->phone;
+            $user->email = $request->email;
+            if($request->password)
+            {
+                $user->password = Hash::make($request->password);
+            }
+            if (!$user->save()) {
+                throw new Exception("Kullanıcı bilgileri güncelleme işleminde sorun oluştu. Lütfen Yöneticiniz ile iletişime geçiniz!");
+            }
+            flash()->success('Kullanıcı bilgileriniz başarıyla güncellenmiştir.');
+            return redirect('/');
+        } catch (\Throwable $th) {
+            Log::error("Kullanıcı bilgileri güncelleme sırasında bir sorun oluştu! Error: ".$th->getMessage());
+            flash()->error("Kullanıcı bilgileri güncelleme sırasında bir sorun oluştu!");
+            return redirect()->route('user.update');
+        }
     }
 
     /**

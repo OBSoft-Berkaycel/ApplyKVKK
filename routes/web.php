@@ -32,15 +32,11 @@ Route::middleware('auth')->group(function () {
     });
     
     Route::controller(UserController::class)->group(function(){
-    
         Route::get('create-user','index')->name('user.create');
         Route::post('create-user','store')->name('user.create');
-        Route::get('myprofile','show')->name('user.show');
+        Route::get('myprofile','show')->name('user.update');
+        Route::post('myprofile','update')->name('user.update');
     });
-});
-
-Route::get("custom-login",function(){
-    return view('auth.custom-login');
 });
 
 require __DIR__.'/auth.php';
