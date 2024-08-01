@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -35,7 +33,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-            // dd(UserType::ADMIN->value);
             $request->validate([
                 'username' => ['required', 'string', 'max:255', 'unique:users,username'],
                 'firstname' => ['required', 'string'],
