@@ -9,7 +9,7 @@
             <div class="app-brand justify-content-center">
               <a href="index.html" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
-                      <img width="24" height="24" src="https://img.icons8.com/external-tal-revivo-filled-tal-revivo/24/external-login-access-of-user-with-a-right-direction-arrow-classic-filled-tal-revivo.png" alt="external-login-access-of-user-with-a-right-direction-arrow-classic-filled-tal-revivo"/>
+                      <img width="24" height="24" src="{{asset('assets/custom/img/app-brand-logo-demo.png')}}" alt="external-login-access-of-user-with-a-right-direction-arrow-classic-filled-tal-revivo"/>
                 </span>
                 <span class="app-brand-text demo text-body fw-bold">AresBPO</span>
               </a>

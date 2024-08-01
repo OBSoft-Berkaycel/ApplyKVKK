@@ -1,71 +1,62 @@
-
-<nav
-class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-id="layout-navbar">
-<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-<a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-    <i class="bx bx-menu bx-sm"></i>
-</a>
-</div>
-
-<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-<!-- Search -->
-<div class="navbar-nav align-items-center">
-    <div class="nav-item d-flex align-items-center">
-    <i class='bx bx-time-five me-3'></i>
-        Mevcut saat: <span class="ms-2" id="current-time">Last Login time: 14:00:00</span>
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+        </a>
     </div>
-</div>
-<!-- /Search -->
-
-<ul class="navbar-nav flex-row align-items-center ms-auto">
-
-    <!-- User -->
-    <li class="nav-item navbar-dropdown dropdown-user dropdown">
-    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-        <div class="avatar avatar-online">
-        <img class="w-px-40 h-auto rounded-circle" src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png" alt="user--v1"/>
+    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <div class="navbar-nav align-items-center">
+            <div class="nav-item d-flex align-items-center">
+            <i class='bx bx-time-five me-3'></i>
+                Mevcut saat: <span class="ms-2" id="current-time">Last Login time: 14:00:00</span>
+            </div>
         </div>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-        <a class="dropdown-item" href="#">
-            <div class="d-flex">
-            <div class="flex-shrink-0 me-3">
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                    <img class="w-px-40 h-auto rounded-circle" src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png" alt="user--v1"/>
+                <img class="w-px-40 h-auto rounded-circle" src="{{asset('assets/custom/img/nav-person-icon.png')}}" alt="user--v1"/>
                 </div>
-            </div>
-            <div class="flex-grow-1">
-                <span class="fw-medium d-block">{{ app('user')->get('username') }}</span>
-                <small class="text-muted">Yetkiniz: {{ app('user')->get('role') == 1 ? 'Kullanıcı' : 'Admin' }}</small>
-            </div>
-            </div>
-        </a>
-        </li>
-        <li>
-        <div class="dropdown-divider"></div>
-        </li>
-        <li>
-        <a class="dropdown-item" href="{{route('user.update')}}">
-            <i class="bx bx-user me-2"></i>
-            <span class="align-middle">Profilim</span>
-        </a>
-        </li>
-        <li>
-        <div class="dropdown-divider"></div>
-        </li>
-        <li>
-            <form action="{{route('logout')}}" method="post">
-                @csrf
-                <button class="dropdown-item" type="submit">
-                    <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Çıkış Yap</span>
-                </button>
-            </form>
-        </li>
-    </ul>
-    </li>
-</ul>
-</div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                                <img class="w-px-40 h-auto rounded-circle" src="{{asset('assets/custom/img/nav-person-icon.png')}}" alt="user--v1"/>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <span class="fw-medium d-block">{{ app('user')->get('username') }}</span>
+                            <small class="text-muted">Yetkiniz: {{ app('user')->get('role') == 1 ? 'Kullanıcı' : 'Admin' }}</small>
+                        </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{route('user.update')}}">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">Profilim</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button class="dropdown-item" type="submit">
+                            <i class="bx bx-power-off me-2"></i>
+                            <span class="align-middle">Çıkış Yap</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            </li>
+        </ul>
+    </div>
 </nav>

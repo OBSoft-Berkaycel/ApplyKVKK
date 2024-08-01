@@ -1,5 +1,4 @@
 @extends('custom.layout')
-
 @section('content')
 <div class="container-xxl">
   <div class="authentication-wrapper authentication-basic container-p-y">
@@ -9,13 +8,12 @@
           <div class="app-brand justify-content-center">
             <a href="index.php" class="app-brand-link gap-2">
               <span class="app-brand-logo demo">
-                <img width="35" height="35" src="https://img.icons8.com/ios/35/add-user-male.png" alt="add-user-male"/>
+                <img width="35" height="35" src="{{asset('assets/custom/img/add-user-male.png')}}" alt="add-user-male"/>
               </span>
               <span class="app-brand-text demo text-body fw-bold">Personel Oluştur</span>
             </a>
           </div>
           <p class="mb-4">Sistem kullanıcısı veya yönetici hesabı oluşturabilirsiniz.</p>
-
           <form class="mb-3" action="{{route('user.create')}}" method="post">
             @csrf
             <div class="mb-3">
@@ -62,7 +60,6 @@
             </div>
             <button class="btn btn-primary d-grid w-100">Personel Oluştur</button>
           </form>
-
         </div>
       </div>
     </div>

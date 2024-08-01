@@ -9,7 +9,7 @@
           <div class="app-brand justify-content-center">
             <a href="index.php" class="app-brand-link gap-2">
               <span class="app-brand-logo demo">
-                <img width="35" height="35" src="https://img.icons8.com/ios/35/add-user-male.png" alt="add-user-male"/>
+                <img width="35" height="35" src="{{asset('assets/custom/img/add-user-male.png')}}" alt="add-user-male"/>
               </span>
               <span class="app-brand-text demo text-body fw-bold">Kullanıcı Bilgilerimi Güncelle</span>
             </a>

@@ -1,12 +1,7 @@
 @extends('layouts.master')
-
 @section('content')
-    <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light"></span></h4>
-
-        <!-- Basic Layout -->
         <div class="row">
           <div class="col-xl">
             <div class="card mb-4">
@@ -61,5 +56,4 @@
           </div>
         </div>
       </div>
-      <!-- / Content -->
 @endsection

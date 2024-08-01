@@ -1,19 +1,14 @@
 @extends('layouts.master')
-
 @section('styles')
 <style>
-    /* Basic styling for the canvas */
     canvas {
         border: 1px solid black;
     }
 </style>
 @endsection
 @section('content')
-    <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light"></span></h4>
-
-        <!-- Basic Layout -->
         <div class="row">
             <div class="col-xl">
                 <div class="card mb-4">
@@ -37,7 +32,6 @@
                             <div class="row">
                                 <h6 class="card-subtitle mb-2 text-muted">Yukarıda açıkça belirtilen, Kişisel Verilerin Korunması Kanunu kapsamında ki metni okudum, anladım, onaylıyorum.</h6>
                                 <div class="col-xl-3">
-                                    {{-- <canvas id="signature-pad" class="mb-3"></canvas><br> --}}
                                     <canvas id="drawingCanvas" class="mb-3"></canvas>
                                     <input type="hidden" name="image_data" id="imageData">
                                 </div>
@@ -54,9 +48,6 @@
             </div>
         </div>
     </div>
-    <!-- / Content -->
-
-    <!-- Modal -->
     <div class="modal fade responseModal" id="modalCenter" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -78,12 +69,11 @@
 @endsection
 
 @section('scripts')
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="{{asset('assets/custom/canvas/jquery-3.2.1.slim.min.js')}}"></script>
+    <script src="{{asset('assets/custom/canvas/popper.min.js')}}"></script>
+    <script src="{{asset('assets/custom/canvas/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/custom/canvas/signature_pad.umd.min.js')}}"></script>
     <script>
-        // Set up the canvas and context
         const canvas = document.getElementById('drawingCanvas');
         const ctx = canvas.getContext('2d');
         let drawing = false;
@@ -105,14 +95,12 @@
             drawing = false;
         });
 
-        // Clear the canvas
         document.getElementById('clear').addEventListener('click', () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
 
-        // Convert canvas to an image and submit the form
         document.getElementById('drawingForm').addEventListener('submit', (e) => {
-            const imageData = canvas.toDataURL('image/png'); // Convert canvas to Base64
+            const imageData = canvas.toDataURL('image/png');
             document.getElementById('imageData').value = imageData;
         });
     </script>
