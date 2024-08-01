@@ -96,12 +96,13 @@
       <!-- Misc -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
       <li class="menu-item">
-        <a
-          href="logout.php"
-          class="menu-link">
-          <i class='menu-icon bx bx-log-out'></i>
-          <div data-i18n="Support">Çıkış Yap</div>
-        </a>
+        <form action="{{route('logout')}}" method="post">
+          @csrf
+          <button type="submit" href="logout.php" class="menu-link">
+            <i class='menu-icon bx bx-log-out'></i>
+            <div data-i18n="Support">Çıkış Yap</div>
+          </button>
+        </form>
       </li>
     </ul>
   </aside>
