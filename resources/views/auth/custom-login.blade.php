@@ -20,8 +20,8 @@
             <form action="{{route('login')}}" method="post" class="mb-3">
                 @csrf
               <div class="mb-3">
-                <label for="email" class="form-label">Kullanıcı Adınız</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="E-posta adresinizi giriniz." autofocus required/>
+                <label for="login" class="form-label">Kullanıcı Adı, Telefon veya Mail Adresi</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="E-posta, telefon veya kullanıcı adı" autofocus required/>
               </div>
               <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">

@@ -19,6 +19,34 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function login(Request $request)
+    {
+        $credentials = $request->only('login', 'password');
+        $login = $credentials['login'];
+        $password = $credentials['password'];
+
+        $field = $this->getLoginField($login);
+
+        if (Auth::attempt([$field => $login, 'password' => $password])) {
+            flash()->success("Giriş başarılı.");
+            return redirect()->intended('dashboard');
+        }
+
+        flash()->error('Kullanıcı bilgileri hatalı!');
+        return back();
+    }
+
+    private function getLoginField($login)
+    {
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            return 'email';
+        } elseif (is_numeric($login)) {
+            return 'phone';
+        } else {
+            return 'username';
+        }
+    }
+
     /**
      * Handle an incoming authentication request.
      */
