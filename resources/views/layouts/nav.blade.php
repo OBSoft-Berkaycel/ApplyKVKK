@@ -28,8 +28,8 @@
                             </div>
                         </div>
                         <div class="flex-grow-1">
-                            <span class="fw-medium d-block">{{ app('user')->get('username') }}</span>
-                            <small class="text-muted">Yetkiniz: {{ app('user')->get('role') == 1 ? 'Kullanıcı' : 'Admin' }}</small>
+                            <span class="fw-medium d-block">{{ \Illuminate\Support\Facades\Auth::user()->username }}</span>
+                            <small class="text-muted">Yetkiniz: {{ \Illuminate\Support\Facades\Auth::user()->type == 1 ? 'Kullanıcı' : 'Admin' }}</small>
                         </div>
                         </div>
                     </a>

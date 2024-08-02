@@ -7,7 +7,7 @@
             <div class="d-flex align-items-end row">
                 <div class="col-sm-7">
                 <div class="card-body">
-                    <h5 class="card-title text-primary">Merhaba, {{ $user->usernam }}</h5>
+                    <h5 class="card-title text-primary">Merhaba, {{ $user->username }}</h5>
                     <p class="mb-4">
                     Sisteme girişiniz başarıyla yapılmıştır. Sistem üzerinde ki hareketleriniz veritabanına kaydedilmektedir.
                     </p>

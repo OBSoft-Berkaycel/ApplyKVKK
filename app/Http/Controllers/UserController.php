@@ -33,6 +33,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
+            if(Auth::user()->type != 2)
+            {
+                return redirect()->back();
+            }
             $request->validate([
                 'username' => ['required', 'string', 'max:255', 'unique:users,username'],
                 'firstname' => ['required', 'string'],
@@ -84,8 +88,14 @@ class UserController extends Controller
                 'lastname' => ['required', 'string'],
                 'email' => ['required','email','unique:users,email,' . Auth::id()],
                 'phone' => ['required', 'regex:/^\d{10}$/', 'unique:users,phone,'. Auth::id()],
-                'password' => ['string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', 'confirmed'],
             ]);
+
+            if($request->password)
+            {
+                $request->validate([
+                    'password' => ['string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', 'confirmed'],
+                ]);
+            }
             $user = User::find(Auth::id());
             $user->name = $request->firstname;
             $user->surname = $request->lastname;
@@ -104,7 +114,7 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             Log::error("Kullanıcı bilgileri güncelleme sırasında bir sorun oluştu! Error: ".$th->getMessage());
             flash()->error("Kullanıcı bilgileri güncelleme sırasında bir sorun oluştu!");
-            return redirect()->route('user.update');
+            return redirect()->back();
         }
     }
 

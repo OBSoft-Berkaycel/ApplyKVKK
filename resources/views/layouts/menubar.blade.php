@@ -66,7 +66,7 @@
                 <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto"><i class='bx bx-plus'></i></div>
               </a>
             </li>
-          @if (app('user')->get('role') == 2)
+          @if (\Illuminate\Support\Facades\Auth::user()->type == 2)
             <li class="menu-item">
               <a href="{{route('form.list')}}"
                 class="menu-link">

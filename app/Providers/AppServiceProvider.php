@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,13 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton('user',function(){
-            $user = Auth::user();
-            return collect([
-                "username" => $user->username,
-                "role" => $user->type,
-            ]);
-        });
+        
     }
 
     /**
