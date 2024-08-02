@@ -11,6 +11,7 @@
                     <th>TC Kimlik No</th>
                     <th>Telefon</th>
                     <th>Adres</th>
+                    <th>İmzalayan Kullanıcı</th>
                     <th>PDF</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                         <td>{{ $form->patient_id }}</td>
                         <td>{{ $form->patient_phone }}</td>
                         <td>{{ $form->patient_address }}</td>
+                        <td>{{ \App\Models\User::find($form->user_id)->username }}</td>
                         <td>
                             <form action="{{route('download.pdf',['form' => $form->id])}}" method="post">
                                 @csrf
