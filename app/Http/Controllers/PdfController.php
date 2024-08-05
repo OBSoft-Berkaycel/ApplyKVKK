@@ -32,10 +32,10 @@ class PdfController extends Controller
         {
             return redirect()->back();
         }
-        $imagePath = Storage::disk('public')->path($form->sign_image_path);
+        $imagePath = public_path('assets/custom/pdf-signs/'.$form->sign_image_path);
         $pdf = $pdf->loadView('custom.pdf', compact('form','imagePath'))
                 ->setPaper('A4', 'portrait');
 
-        return $pdf->download('kvkk_bilgilendirme_'.$form->patient_name.'_'.$form->patient_surname.'.pdf');
+        return $pdf->download('KVKK Raporu '.$form->patient_name.'_'.$form->patient_surname.'.pdf');
     }
 }

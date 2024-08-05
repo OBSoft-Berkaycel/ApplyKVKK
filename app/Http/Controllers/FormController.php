@@ -64,9 +64,9 @@ class FormController extends Controller
             $imageData = str_replace('data:image/png;base64,', '', $imageData);
             $imageData = str_replace(' ', '+', $imageData);
             $image = base64_decode($imageData);
-            $fileName = Auth::user()->email.'-'.Carbon::now()->format("Y-m-d-His").'.png';
+            $fileName = $kvkk->first_name.'-'.$kvkk->last_name.'-'.Carbon::now()->format("Y-m-d-His").'.png';
             
-            Storage::disk('public')->put($fileName, $image);
+            file_put_contents(public_path('assets/custom/pdf-signs/'.$fileName), $image);
             $form = new Form();
             $form->user_id = Auth::id();
             $form->patient_name = $kvkk->first_name;
