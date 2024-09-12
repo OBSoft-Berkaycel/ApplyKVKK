@@ -11,7 +11,7 @@
                 <span class="app-brand-logo demo">
                       <img width="24" height="24" src="{{asset('assets/custom/img/app-brand-logo-demo.png')}}" alt="external-login-access-of-user-with-a-right-direction-arrow-classic-filled-tal-revivo"/>
                 </span>
-                <span class="app-brand-text demo text-body fw-bold">AresBPO</span>
+                <span class="app-brand-text demo text-body fw-bold">Apply KVKK</span>
               </a>
             </div>
             <h4 class="mb-2">KVKK Yönetim Sistemi 👋</h4>

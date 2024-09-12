@@ -5,8 +5,8 @@
         <script>
             document.write(new Date().getFullYear());
         </script>
-        , AresBPO |
-        <a href="https://aresbpo.com" target="_blank" class="footer-link fw-medium">Cera Bilgi ve İletişim Hizmetleri Limited Şirketi</a>
+        , Apply KVKK |
+        <a href="#" target="_blank" class="footer-link fw-medium">ApplyTech Co.</a>
         </div>
     </div>
 </footer>
